@@ -56,6 +56,32 @@
             background: #e6f5f3;
         }
 
+        .restartButton {
+
+            width: 180px;
+            height: 55px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: #1E7A78;
+            color: white;
+
+            font-size: 20px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 20px;
+
+            transition: 0.2s;
+        }
+
+        .restartButton:hover {
+            transform: scale(1.05);
+            background: #25908D;
+        }
+        
         .score {
             margin-top: 15px;
             font-size: 18px;
@@ -113,7 +139,7 @@
 
         <div class="score" id="score"></div>
 
-        <button class="gameButton" onclick="resetGame()">
+        <button class="restartButton" onclick="resetGame()">
             重新開始
         </button>
 
