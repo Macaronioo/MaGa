@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>圈圈叉叉 AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+
+            background: white;
+            border-radius: 12px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 40px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .cell:hover {
+            background: #e6f5f3;
+        }
+
+        .score {
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+<button class="backButton" onclick="location.href='index.html'">
+    返回主選單
+</button>
+
+<div class="gameArea">
+
+    <div>
+
+        <h1>圈圈叉叉 AI</h1>
+
+        <div class="board" id="board"></div>
+
+        <h2 id="status"></h2>
+
+        <div class="score" id="score"></div>
+
+        <button class="gameButton" onclick="resetGame()">
+            重新開始
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+    let board = ["", "", "", "", "", "", "", "", ""];
+    let gameOver = false;
+
+    let score = {
+        player: 0,
+        ai: 0,
+        draw: 0
+    };
+
+    // 讀取紀錄
+    if (localStorage.getItem("tttScore")) {
+        score = JSON.parse(localStorage.getItem("tttScore"));
+    }
+
+    const boardDiv = document.getElementById("board");
+    const statusText = document.getElementById("status");
+    const scoreText = document.getElementById("score");
+
+    function drawBoard() {
+        boardDiv.innerHTML = "";
+
+        board.forEach((cell, index) => {
+            const div = document.createElement("div");
+            div.className = "cell";
+            div.innerText = cell;
+
+            div.onclick = () => playerMove(index);
+
+            boardDiv.appendChild(div);
+        });
+
+        updateScore();
+    }
+
+    function playerMove(index) {
+        if (board[index] !== "" || gameOver) return;
+
+        board[index] = "❌";
+        drawBoard();
+
+        if (checkWin("❌")) {
+            statusText.innerText = "你贏了！";
+            score.player++;
+            saveScore();
+            gameOver = true;
+            return;
+        }
+
+        if (!board.includes("")) {
+            statusText.innerText = "平手！";
+            score.draw++;
+            saveScore();
+            gameOver = true;
+            return;
+        }
+
+        setTimeout(aiMove, 300);
+    }
+
+    function aiMove() {
+        if (gameOver) return;
+
+        let move = findBestMove();
+
+        board[move] = "⭕";
+        drawBoard();
+
+        if (checkWin("⭕")) {
+            statusText.innerText = "電腦贏了！";
+            score.ai++;
+            saveScore();
+            gameOver = true;
+            return;
+        }
+
+        if (!board.includes("")) {
+            statusText.innerText = "平手！";
+            score.draw++;
+            saveScore();
+            gameOver = true;
+            return;
+        }
+    }
+
+    // 🤖 AI核心（防守 + 進攻）
+    function findBestMove() {
+
+        // 1. 先找自己能贏的位置
+        let winMove = findWinningMove("⭕");
+        if (winMove !== -1) return winMove;
+
+        // 2. 再找阻止玩家的位置
+        let blockMove = findWinningMove("❌");
+        if (blockMove !== -1) return blockMove;
+
+        // 3. 中心優先
+        if (board[4] === "") return 4;
+
+        // 4. 隨機
+        let empty = board
+            .map((v, i) => v === "" ? i : null)
+            .filter(v => v !== null);
+
+        return empty[Math.floor(Math.random() * empty.length)];
+    }
+
+    function findWinningMove(player) {
+        const winPatterns = [
+            [0,1,2],[3,4,5],[6,7,8],
+            [0,3,6],[1,4,7],[2,6,8],
+            [0,4,8],[2,4,6]
+        ];
+
+        for (let pattern of winPatterns) {
+            let values = pattern.map(i => board[i]);
+
+            let countPlayer = values.filter(v => v === player).length;
+            let countEmpty = values.filter(v => v === "").length;
+
+            if (countPlayer === 2 && countEmpty === 1) {
+                return pattern.find(i => board[i] === "");
+            }
+        }
+
+        return -1;
+    }
+
+    function checkWin(player) {
+        const winPatterns = [
+            [0,1,2],[3,4,5],[6,7,8],
+            [0,3,6],[1,4,7],[2,6,8],
+            [0,4,8],[2,4,6]
+        ];
+
+        return winPatterns.some(pattern =>
+            pattern.every(i => board[i] === player)
+        );
+    }
+
+    function saveScore() {
+        localStorage.setItem("tttScore", JSON.stringify(score));
+        updateScore();
+    }
+
+    function updateScore() {
+        scoreText.innerHTML =
+            `你：${score.player} ｜ 電腦：${score.ai} ｜ 平手：${score.draw}`;
+    }
+
+    function resetGame() {
+        board = ["", "", "", "", "", "", "", "", ""];
+        gameOver = false;
+        statusText.innerText = "";
+        drawBoard();
+    }
+
+    drawBoard();
+</script>
+
+</body>
+</html>
