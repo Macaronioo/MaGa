@@ -158,20 +158,55 @@ h1{
    📱 手機優化
 ========================= */
 
-@media (max-width:600px){
+@media (max-width: 600px) {
 
-    h1{
-        font-size:34px;
-        margin-top:25px;
+    /* ======================
+       🧠 主標題變大
+    ====================== */
+    h1 {
+        font-size: 8vw;
+        margin-top: 20px;
     }
 
-    .menuContainer{
-        gap:10px;
-        padding:15px;
+    /* ======================
+       🎮 圈圈叉叉棋盤放大
+    ====================== */
+    .board {
+        grid-template-columns: repeat(3, 28vw);
+        grid-template-rows: repeat(3, 28vw);
     }
 
-    .gameButton{
-        font-size:14px;
-        border-radius:12px;
+    .cell {
+        font-size: 12vw;
+    }
+
+    /* ======================
+       🔘 重新開始按鈕縮小 + 變好按
+    ====================== */
+    .gameButton {
+        width: 60%;
+        height: 50px;
+        font-size: 18px;
+    }
+
+    /* ======================
+       🏠 返回按鈕變大（重點）
+    ====================== */
+    .homeButton {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+    }
+
+    /* ======================
+       🎮 主畫面文字（遊戲按鈕）
+    ====================== */
+    .gameButton {
+        font-size: 20px;
+    }
+
+    .menuContainer {
+        gap: 12px;
+        padding: 10px;
     }
 }
