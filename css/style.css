@@ -1,176 +1,167 @@
-body{
-    margin:0;
-    padding:0;
+body {
+    margin: 0;
+    padding: 0;
 
-    background:#DAEEE1;
+    background: #DAEEE1;
 
-    font-family:Arial;
-    color:#0B5351;
+    font-family: Arial;
+    color: #0B5351;
 }
 
 /* =========================
-   標題
+   🧠 標題
 ========================= */
 
-h1{
-    text-align:center;
+h1 {
+    text-align: center;
 
-    margin-top:40px;
+    margin-top: 40px;
 
-    font-size:48px;
+    font-size: 48px;
 
-    color:#0B5351;
+    color: #0B5351;
 }
 
 /* =========================
-   🎮 主畫面九宮格（重點）
+   🎮 主畫面九宮格
 ========================= */
 
-.menuContainer{
+.menuContainer {
+    width: 100%;
+    max-width: 600px;
 
-    width:100%;
-    max-width:600px;
+    margin: 60px auto;
 
-    margin:60px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:15px;
-
-    padding:10px;
+    padding: 10px;
 }
 
 /* =========================
-   🎮 遊戲按鈕（改成方形）
+   🎮 遊戲按鈕（主畫面 + 通用）
 ========================= */
 
-.gameButton{
+.gameButton {
+    width: 100%;
+    aspect-ratio: 1/1;
 
-    width:100%;
-    aspect-ratio:1/1;   /* 🔥 正方形關鍵 */
+    border: none;
+    border-radius: 15px;
 
-    border:none;
-    border-radius:15px;
+    background: #1E7A78;
+    color: white;
 
-    background:#1E7A78;
+    font-size: 18px;
+    font-weight: bold;
 
-    color:white;
+    cursor: pointer;
 
-    font-size:18px;
-    font-weight:bold;
+    transition: transform 0.2s, background 0.2s;
 
-    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    transition:
-        transform 0.2s,
-        background 0.2s;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
+    text-align: center;
 }
 
 /* hover */
-.gameButton:hover{
-
-    transform:scale(1.05);
-
-    background:#25908D;
+.gameButton:hover {
+    transform: scale(1.05);
+    background: #25908D;
 }
 
 /* =========================
    ❌ 禁用按鈕
 ========================= */
 
-.disabledButton{
-
-    background:#8FA8A7;
-
-    opacity:0.7;
-
-    cursor:not-allowed;
+.disabledButton {
+    background: #8FA8A7;
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
-.disabledButton:hover{
-
-    transform:none;
-
-    background:#8FA8A7;
+.disabledButton:hover {
+    transform: none;
 }
 
 /* =========================
-   🔙 返回按鈕
+   🔙 返回首頁按鈕
 ========================= */
 
-.backButton{
+.backButton,
+.homeButton {
+    position: fixed;
+    top: 20px;
+    left: 20px;
 
-    position:fixed;
+    width: 50px;
+    height: 50px;
 
-    top:20px;
-    left:20px;
+    border: none;
+    border-radius: 50%;
 
-    width:50px;
-    height:50px;
+    background: #0B5351;
+    color: white;
 
-    border:none;
-    border-radius:50%;
+    font-size: 22px;
 
-    background:#0B5351;
+    cursor: pointer;
 
-    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    font-size:22px;
+    z-index: 999;
 
-    cursor:pointer;
-
-    transition:0.2s;
-
-    z-index:999;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    transition: 0.2s;
 }
 
-.backButton:hover{
-    transform:scale(1.1);
-    background:#146865;
+.backButton:hover,
+.homeButton:hover {
+    transform: scale(1.1);
+    background: #146865;
 }
 
 /* =========================
    🎮 遊戲畫面區域
 ========================= */
 
-.gameArea{
+.gameArea {
+    width: 100%;
+    height: 100vh;
 
-    width:100%;
-    height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* =========================
-   📱 手機優化
+   📱 手機優化（全部統一修正）
 ========================= */
 
 @media (max-width: 600px) {
 
-    /* ======================
-       🧠 主標題變大
-    ====================== */
+    /* 🧠 標題 */
     h1 {
         font-size: 8vw;
         margin-top: 20px;
     }
 
-    /* ======================
-       🎮 圈圈叉叉棋盤放大
-    ====================== */
+    /* 🎮 主畫面按鈕 */
+    .gameButton {
+        font-size: 16px;
+    }
+
+    /* 🎮 九宮格縮小間距 */
+    .menuContainer {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    /* 🎮 圈圈叉叉棋盤 */
     .board {
         grid-template-columns: repeat(3, 28vw);
         grid-template-rows: repeat(3, 28vw);
@@ -180,33 +171,11 @@ h1{
         font-size: 12vw;
     }
 
-    /* ======================
-       🔘 重新開始按鈕縮小 + 變好按
-    ====================== */
-    .gameButton {
-        width: 60%;
-        height: 50px;
-        font-size: 18px;
-    }
-
-    /* ======================
-       🏠 返回按鈕變大（重點）
-    ====================== */
+    /* 🏠 返回按鈕 */
+    .backButton,
     .homeButton {
         width: 60px;
         height: 60px;
         font-size: 28px;
-    }
-
-    /* ======================
-       🎮 主畫面文字（遊戲按鈕）
-    ====================== */
-    .gameButton {
-        font-size: 20px;
-    }
-
-    .menuContainer {
-        gap: 12px;
-        padding: 10px;
     }
 }
