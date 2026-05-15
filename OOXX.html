@@ -21,7 +21,7 @@
         }
 
         /* 每一格 */
-        .cell {
+        .tttCell {
             width: 120px;
             height: 120px;
 
@@ -38,22 +38,22 @@
         }
 
         /* 🔥 右邊線（第1、2欄） */
-        .cell:nth-child(1),
-        .cell:nth-child(2),
-        .cell:nth-child(4),
-        .cell:nth-child(5),
-        .cell:nth-child(7),
-        .cell:nth-child(8) {
+        .tttCell:nth-child(1),
+        .tttCell:nth-child(2),
+        .tttCell:nth-child(4),
+        .tttCell:nth-child(5),
+        .tttCell:nth-child(7),
+        .tttCell:nth-child(8) {
             border-right: 3px solid #0B5351;
         }
 
         /* 🔥 下邊線（第1~6格） */
-        .cell:nth-child(-n+6) {
+        .tttCell:nth-child(-n+6) {
             border-bottom: 3px solid #0B5351;
         }
 
         /* hover */
-        .cell:hover {
+        .tttCell:hover {
             background: #e6f5f3;
         }
 
@@ -189,10 +189,10 @@
     function drawBoard() {
         boardDiv.innerHTML = "";
 
-        board.forEach((cell, index) => {
+        board.forEach((tttCell, index) => {
             const div = document.createElement("div");
-            div.className = "cell";
-            div.innerText = cell;
+            div.className = "tttCell";
+            div.innerText = tttCell;
 
             div.onclick = () => playerMove(index);
 
