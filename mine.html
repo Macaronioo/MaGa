@@ -136,6 +136,8 @@ h1{
 
     font-size: 14px;
 
+    font-family: Arial,sans-serif;
+
     background: #1E7A78;
 
     display: flex;
@@ -347,7 +349,7 @@ function startGame(diff){
 
     flagMode = false;
 
-    flagBtn.innerText = "🚩";
+    flagBtn.innerHTML = "⚑";
 
     flagBtn.classList.remove("active");
 
@@ -484,7 +486,7 @@ function renderBoard(){
 
                 if(cell.mine){
 
-                    div.innerText = "💣";
+                    div.innerHTML = "✹";
 
                     div.classList.add("mine");
 
@@ -497,7 +499,7 @@ function renderBoard(){
 
             }else if(cell.flag){
 
-                div.innerText = "🚩";
+                div.innerHTML = "⚑";
 
                 div.classList.add("flag");
 
