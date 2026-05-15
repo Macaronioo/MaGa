@@ -33,7 +33,7 @@ h1 {
     margin: 60px auto;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 
     padding: 10px;
@@ -178,4 +178,47 @@ h1 {
         height: 50px;
         font-size: 24px;
     }
+}
+
+/* 分類按鈕 */
+
+.categoryHeader {
+
+    width: 620px;
+
+    max-width: calc(100% - 20px);
+
+    margin: 20px auto 10px auto;
+
+    display: block;
+
+    padding: 15px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: #0B5351;
+
+    color: white;
+
+    font-size: 32px;
+    font-weight: bold;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+/* 預設收合 */
+
+.menuContainer {
+
+    display: none;
+}
+
+/* 展開 */
+
+.menuContainer.show {
+
+    display: grid;
 }
