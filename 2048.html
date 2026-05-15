@@ -44,8 +44,13 @@
 .g2048Board {
     display: grid;
 
-    grid-template-columns: repeat(4, min(22vw, 90px));
-    grid-template-rows: repeat(4, min(22vw, 90px));
+    width: 95vw;
+    max-width: 500px;
+
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+
+    aspect-ratio: 1 / 1;
 
     gap: 10px;
 
@@ -55,7 +60,7 @@
     background: #0B5351;
     border-radius: 12px;
 
-    touch-action: none;   /* ⭐ 防止手機滑動網頁 */
+    touch-action: none;
 }
 
 /* 格子 */
@@ -67,7 +72,7 @@
     justify-content: center;
     align-items: center;
 
-    font-size: clamp(18px, 5vw, 34px); /* ⭐ 重點 */
+    font-size: clamp(22px, 10vw, 60px);
     font-weight: bold;
 
     border-radius: 10px;
@@ -76,6 +81,8 @@
     color: #0B5351;
 
     user-select: none;
+
+    overflow: hidden;
 }
 
 /* 分數色 */
@@ -257,9 +264,20 @@ function render(){
             let v = board[r][c];
 
             if(v !== 0){
-                div.innerText = v;
-                div.dataset.v = v;
+               div.innerText = v;
+               div.dataset.v = v;
+
+               if(v >= 1000){
+                  div.style.fontSize = "8vw";
+               }
+               else if(v >= 100){
+                  div.style.fontSize = "10vw";
+               }
+               else{
+                  div.style.fontSize = "14vw";
+               }
             }
+         
 
             boardEl.appendChild(div);
         }
@@ -390,11 +408,23 @@ document.addEventListener("keydown", e=>{
 let startX, startY;
 
 document.addEventListener("touchstart", e=>{
+
+    e.preventDefault();
+
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
-});
+
+}, { passive:false });
+
+document.addEventListener("touchmove", e=>{
+
+    e.preventDefault();
+
+}, { passive:false });
 
 document.addEventListener("touchend", e=>{
+
+    e.preventDefault();
 
     let dx = e.changedTouches[0].clientX - startX;
     let dy = e.changedTouches[0].clientY - startY;
@@ -417,7 +447,8 @@ document.addEventListener("touchend", e=>{
     if(isGameOver()){
         overMask.style.display="flex";
     }
-});
+
+}, { passive:false });
 
 /* =========================
    控制
