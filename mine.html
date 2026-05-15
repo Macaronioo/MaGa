@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>踩地雷</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+/* =========================
+   🎮 遊戲區
+========================= */
+
+.gameWrapper{
+
+    width: 95vw;
+    max-width: 520px;
+
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* =========================
+   🎛 上方控制列
+========================= */
+
+.topPanel{
+
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.modeButtons{
+
+    display: flex;
+    gap: 8px;
+}
+
+.modeBtn{
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 8px 12px;
+
+    background: #1E7A78;
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.modeBtn.active{
+    background: #0B5351;
+}
+
+/* =========================
+   🚩 模式按鈕
+========================= */
+
+.flagModeBtn{
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+    border: none;
+
+    background: #0B5351;
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+.flagModeBtn.active{
+    background: #C0392B;
+}
+
+/* =========================
+   🧨 棋盤
+========================= */
+
+.board{
+
+    display: grid;
+
+    gap: 3px;
+
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+
+/* =========================
+   🟩 格子
+========================= */
+
+.cell{
+
+    background: #1E7A78;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+
+    border-radius: 6px;
+
+    user-select: none;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+
+    color: white;
+}
+
+.cell.revealed{
+
+    background: #DCEFED;
+    color: #0B5351;
+}
+
+.cell.mine{
+    background: #D64541;
+}
+
+.cell.flag{
+    background: #F39C12;
+}
+
+/* =========================
+   📢 狀態文字
+========================= */
+
+.message{
+
+    margin: 15px 0;
+
+    font-size: 28px;
+    font-weight: bold;
+
+    min-height: 40px;
+}
+
+/* =========================
+   📱 手機
+========================= */
+
+@media (max-width:600px){
+
+    .cell{
+        font-size: 16px;
+    }
+
+    .modeBtn{
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- 🏠 左上 -->
+<button class="homeButton leftBtn"
+onclick="location.href='../index.html'">
+
+🏠
+
+</button>
+
+<!-- 🔄 右上 -->
+<button class="homeButton rightBtn"
+onclick="startGame(currentDifficulty)">
+
+🔄
+
+</button>
+
+<h1>踩地雷</h1>
+
+<div class="gameWrapper">
+
+    <!-- 🎛 控制列 -->
+    <div class="topPanel">
+
+        <div class="modeButtons">
+
+            <button class="modeBtn active"
+            onclick="changeDifficulty('easy')">
+
+                簡單
+
+            </button>
+
+            <button class="modeBtn"
+            onclick="changeDifficulty('medium')">
+
+                中等
+
+            </button>
+
+            <button class="modeBtn"
+            onclick="changeDifficulty('hard')">
+
+                困難
+
+            </button>
+
+        </div>
+
+        <!-- 🚩 插旗模式 -->
+        <button class="flagModeBtn"
+        id="flagBtn"
+        onclick="toggleFlagMode()">
+
+            🚩
+
+        </button>
+
+    </div>
+
+    <div class="message" id="message"></div>
+
+    <div class="board" id="board"></div>
+
+</div>
+
+<script>
+
+/* =========================
+   🧠 基本資料
+========================= */
+
+const boardEl =
+    document.getElementById("board");
+
+const messageEl =
+    document.getElementById("message");
+
+let board = [];
+
+let rows = 8;
+let cols = 8;
+let mines = 10;
+
+let gameOver = false;
+
+let flagMode = false;
+
+let currentDifficulty = "easy";
+
+/* =========================
+   🎮 難度
+========================= */
+
+const difficulties = {
+
+    easy: {
+        rows:8,
+        cols:8,
+        mines:10
+    },
+
+    medium: {
+        rows:10,
+        cols:10,
+        mines:18
+    },
+
+    hard: {
+        rows:12,
+        cols:12,
+        mines:30
+    }
+
+};
+
+/* =========================
+   🎮 開始遊戲
+========================= */
+
+function startGame(diff){
+
+    gameOver = false;
+
+    messageEl.innerText = "";
+
+    currentDifficulty = diff;
+
+    rows = difficulties[diff].rows;
+    cols = difficulties[diff].cols;
+    mines = difficulties[diff].mines;
+
+    board = [];
+
+    createBoard();
+
+    renderBoard();
+
+}
+
+/* =========================
+   🧨 建立棋盤
+========================= */
+
+function createBoard(){
+
+    for(let r=0;r<rows;r++){
+
+        board[r] = [];
+
+        for(let c=0;c<cols;c++){
+
+            board[r][c] = {
+
+                mine:false,
+                revealed:false,
+                flag:false,
+                count:0
+
+            };
+
+        }
+
+    }
+
+    let placed = 0;
+
+    while(placed < mines){
+
+        let r =
+            Math.floor(Math.random()*rows);
+
+        let c =
+            Math.floor(Math.random()*cols);
+
+        if(!board[r][c].mine){
+
+            board[r][c].mine = true;
+
+            placed++;
+
+        }
+
+    }
+
+    for(let r=0;r<rows;r++){
+
+        for(let c=0;c<cols;c++){
+
+            board[r][c].count =
+                countMines(r,c);
+
+        }
+
+    }
+
+}
+
+/* =========================
+   🔢 計算附近地雷
+========================= */
+
+function countMines(r,c){
+
+    let total = 0;
+
+    for(let dr=-1;dr<=1;dr++){
+
+        for(let dc=-1;dc<=1;dc++){
+
+            let nr = r+dr;
+            let nc = c+dc;
+
+            if(
+                nr>=0 &&
+                nr<rows &&
+                nc>=0 &&
+                nc<cols &&
+                board[nr][nc].mine
+            ){
+                total++;
+            }
+
+        }
+
+    }
+
+    return total;
+
+}
+
+/* =========================
+   🎨 渲染
+========================= */
+
+function renderBoard(){
+
+    boardEl.innerHTML = "";
+
+    boardEl.style.gridTemplateColumns =
+        `repeat(${cols},1fr)`;
+
+    board.forEach((row,r)=>{
+
+        row.forEach((cell,c)=>{
+
+            const div =
+                document.createElement("div");
+
+            div.className = "cell";
+
+            if(cell.revealed){
+
+                div.classList.add("revealed");
+
+                if(cell.mine){
+
+                    div.innerText = "💣";
+
+                    div.classList.add("mine");
+
+                }else if(cell.count > 0){
+
+                    div.innerText = cell.count;
+
+                }
+
+            }else if(cell.flag){
+
+                div.innerText = "🚩";
+
+                div.classList.add("flag");
+
+            }
+
+            div.onclick =
+                ()=>handleClick(r,c);
+
+            div.oncontextmenu = (e)=>{
+
+                e.preventDefault();
+
+                toggleFlag(r,c);
+
+            };
+
+            let pressTimer;
+
+            div.addEventListener("touchstart",()=>{
+
+                pressTimer = setTimeout(()=>{
+
+                    toggleFlag(r,c);
+
+                },400);
+
+            });
+
+            div.addEventListener("touchend",()=>{
+
+                clearTimeout(pressTimer);
+
+            });
+
+            boardEl.appendChild(div);
+
+        });
+
+    });
+
+}
+
+/* =========================
+   👆 點擊
+========================= */
+
+function handleClick(r,c){
+
+    if(gameOver) return;
+
+    const cell = board[r][c];
+
+    if(flagMode){
+
+        toggleFlag(r,c);
+
+        return;
+
+    }
+
+    if(cell.flag || cell.revealed)
+        return;
+
+    if(cell.mine){
+
+        revealAll();
+
+        messageEl.innerText =
+            "💀 失敗！";
+
+        gameOver = true;
+
+        return;
+
+    }
+
+    reveal(r,c);
+
+    renderBoard();
+
+    checkWin();
+
+}
+
+/* =========================
+   🚩 插旗
+========================= */
+
+function toggleFlag(r,c){
+
+    if(gameOver) return;
+
+    const cell = board[r][c];
+
+    if(cell.revealed) return;
+
+    cell.flag = !cell.flag;
+
+    renderBoard();
+
+    checkWin();
+
+}
+
+/* =========================
+   🔓 展開
+========================= */
+
+function reveal(r,c){
+
+    const cell = board[r][c];
+
+    if(
+        r<0 || c<0 ||
+        r>=rows || c>=cols ||
+        cell.revealed ||
+        cell.flag
+    ) return;
+
+    cell.revealed = true;
+
+    if(cell.count === 0){
+
+        for(let dr=-1;dr<=1;dr++){
+
+            for(let dc=-1;dc<=1;dc++){
+
+                reveal(r+dr,c+dc);
+
+            }
+
+        }
+
+    }
+
+}
+
+/* =========================
+   💣 全開
+========================= */
+
+function revealAll(){
+
+    board.forEach(row=>{
+
+        row.forEach(cell=>{
+
+            cell.revealed = true;
+
+        });
+
+    });
+
+    renderBoard();
+
+}
+
+/* =========================
+   🏆 勝利判定
+========================= */
+
+function checkWin(){
+
+    let win = true;
+
+    for(let r=0;r<rows;r++){
+
+        for(let c=0;c<cols;c++){
+
+            const cell = board[r][c];
+
+            if(
+                !cell.mine &&
+                !cell.revealed
+            ){
+                win = false;
+            }
+
+        }
+
+    }
+
+    if(win){
+
+        messageEl.innerText =
+            "🎉 勝利！";
+
+        gameOver = true;
+
+    }
+
+}
+
+/* =========================
+   🚩 切換插旗模式
+========================= */
+
+function toggleFlagMode(){
+
+    flagMode = !flagMode;
+
+    document.getElementById("flagBtn")
+        .classList.toggle("active");
+
+}
+
+/* =========================
+   🎮 切換難度
+========================= */
+
+function changeDifficulty(diff){
+
+    document.querySelectorAll(".modeBtn")
+        .forEach(btn=>{
+
+            btn.classList.remove("active");
+
+        });
+
+    event.target.classList.add("active");
+
+    startGame(diff);
+
+}
+
+/* =========================
+   🚀 啟動
+========================= */
+
+startGame("easy");
+
+</script>
+
+</body>
+
+</html>
