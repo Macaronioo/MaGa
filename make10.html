@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Make 10</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+/* ===== 遊戲容器 ===== */
+.gameContainer{
+    width: 100%;
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===== 棋盤 ===== */
+.board{
+    width: 95vw;
+    max-width: 420px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+/* ===== 數字格子 ===== */
+.cell{
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 8vw;
+    font-weight: bold;
+
+    border-radius: 12px;
+
+    background: #1E7A78;
+    color: white;
+
+    user-select: none;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+/* 選取效果 */
+.cell.selected{
+    background: #FFD166;
+    color: #0B5351;
+    transform: scale(1.08);
+}
+
+/* ===== Game Over ===== */
+.winMask{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.6);
+}
+
+.winBox{
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+/* ===== 手機禁止滑動 ===== */
+body{
+    margin: 0;
+    overscroll-behavior: none;
+    touch-action: none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- 🏠 左上 -->
+<button class="homeButton leftBtn" onclick="location.href='index.html'">🏠</button>
+
+<!-- 🔄 右上 -->
+<button class="homeButton rightBtn" onclick="init()">🔄</button>
+
+<div class="gameContainer">
+
+    <h1>MAKE 10</h1>
+
+    <div id="board" class="board"></div>
+
+</div>
+
+<!-- 🎉 勝利 -->
+<div class="winMask" id="winMask">
+    <div class="winBox">
+        <h2>完成！</h2>
+        <button onclick="init()">再玩一次</button>
+    </div>
+</div>
+
+<script>
+
+let board = [];
+let selected = [];
+
+const boardEl = document.getElementById("board");
+const winMask = document.getElementById("winMask");
+
+/* ===== 初始化 ===== */
+function init(){
+
+    board = [];
+
+    for(let i=0;i<16;i++){
+        board.push(Math.floor(Math.random()*9)+1);
+    }
+
+    selected = [];
+    render();
+    winMask.style.display = "none";
+}
+
+/* ===== 畫面 ===== */
+function render(){
+
+    boardEl.innerHTML = "";
+
+    board.forEach((num, index)=>{
+
+        if(num === null){
+            let empty = document.createElement("div");
+            boardEl.appendChild(empty);
+            return;
+        }
+
+        let div = document.createElement("div");
+        div.className = "cell";
+
+        div.innerText = num;
+
+        if(selected.includes(index)){
+            div.classList.add("selected");
+        }
+
+        div.onclick = ()=>handleClick(index);
+
+        boardEl.appendChild(div);
+    });
+}
+
+/* ===== 點擊邏輯 ===== */
+function handleClick(index){
+
+    if(selected.includes(index)) return;
+
+    selected.push(index);
+
+    if(selected.length === 2){
+
+        let sum =
+            board[selected[0]] +
+            board[selected[1]];
+
+        if(sum === 10){
+            board[selected[0]] = null;
+            board[selected[1]] = null;
+        }
+
+        selected = [];
+    }
+
+    checkWin();
+    render();
+}
+
+/* ===== 勝利判斷 ===== */
+function checkWin(){
+
+    if(board.every(v => v === null)){
+        winMask.style.display = "flex";
+    }
+}
+
+/* 啟動 */
+init();
+
+</script>
+
+</body>
+</html>
