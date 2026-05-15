@@ -160,7 +160,7 @@ h1 {
     }
 
     /* 🎮 圈圈叉叉棋盤 */
-    .board {
+    .tttBoard {
         grid-template-columns: repeat(3, 28vw);
         grid-template-rows: repeat(3, 28vw);
     }
