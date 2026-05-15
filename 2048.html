@@ -69,10 +69,10 @@
     height: 100%;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    font-size: clamp(22px, 10vw, 60px);
+    font-size: clamp(16px, 6vw, 40px);
     font-weight: bold;
 
     border-radius: 10px;
@@ -267,14 +267,16 @@ function render(){
                div.innerText = v;
                div.dataset.v = v;
 
+               div.style.lineHeight = "1";
+
                if(v >= 1000){
-                  div.style.fontSize = "8vw";
+                  div.style.fontSize = "0.9em";
                }
                else if(v >= 100){
-                  div.style.fontSize = "10vw";
+                  div.style.fontSize = "1.2em";
                }
                else{
-                  div.style.fontSize = "14vw";
+                  div.style.fontSize = "1.8em";
                }
             }
          
