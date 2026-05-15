@@ -93,9 +93,7 @@ h1 {
 
 .backButton,
 .homeButton {
-    position: fixed;
     top: 15px;
-    left: 15px;
 
     width: 52px;
     height: 52px;
@@ -221,4 +219,22 @@ h1 {
 .menuContainer.show {
 
     display: grid;
+}
+
+/* 🏠 左上 */
+.leftBtn {
+
+    position: fixed;
+
+    top: 15px;
+    left: 15px;
+}
+
+/* 🔄 右上 */
+.rightBtn {
+
+    position: fixed;
+
+    top: 15px;
+    right: 15px;
 }
