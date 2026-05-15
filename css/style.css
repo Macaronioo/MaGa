@@ -6,6 +6,9 @@ body {
 
     font-family: Arial;
     color: #0B5351;
+
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
 /* =========================
