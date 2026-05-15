@@ -3,94 +3,101 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Make 10</title>
+<title>Flow 7 Game</title>
 
 <link rel="stylesheet" href="css/style.css">
 
 <style>
 
-/* ===== 遊戲容器 ===== */
-.gameContainer{
-    width: 100%;
-    max-width: 500px;
-
-    margin: 0 auto;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* ===== 棋盤 ===== */
-.board{
-    width: 95vw;
-    max-width: 420px;
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 10px;
-
-    margin-top: 20px;
-}
-
-/* ===== 數字格子 ===== */
-.cell{
-    aspect-ratio: 1 / 1;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 8vw;
-    font-weight: bold;
-
-    border-radius: 12px;
-
-    background: #1E7A78;
-    color: white;
-
-    user-select: none;
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-/* 選取效果 */
-.cell.selected{
-    background: #FFD166;
-    color: #0B5351;
-    transform: scale(1.08);
-}
-
-/* ===== Game Over ===== */
-.winMask{
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    display: none;
-    justify-content: center;
-    align-items: center;
-
-    background: rgba(0,0,0,0.6);
-}
-
-.winBox{
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-}
-
-/* ===== 手機禁止滑動 ===== */
+/* ===== 基礎 ===== */
 body{
-    margin: 0;
-    overscroll-behavior: none;
-    touch-action: none;
+    margin:0;
+    background:#DAEEE1;
+    font-family:Arial;
+    touch-action:none;
+}
+
+/* ===== 容器 ===== */
+.gameContainer{
+    width:100%;
+    max-width:500px;
+    margin:0 auto;
+    text-align:center;
+}
+
+/* ===== 流動數列 ===== */
+.board{
+    width:95vw;
+    max-width:420px;
+
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:8px;
+    margin:20px auto;
+}
+
+/* ===== 格子 ===== */
+.cell{
+    width: calc((95vw - 40px) / 7);
+    max-width:50px;
+    aspect-ratio:1/1;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#1E7A78;
+    color:white;
+    font-weight:bold;
+    border-radius:10px;
+
+    user-select:none;
+}
+
+/* 選取 */
+.cell.selected{
+    background:#FFD166;
+    color:#0B5351;
+}
+
+/* ===== 按鈕（沿用你風格） ===== */
+.homeButton,
+.actionButton{
+    position:fixed;
+    top:15px;
+
+    width:52px;
+    height:52px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#0B5351;
+    color:white;
+    font-size:20px;
+}
+
+/* 左上 */
+.leftBtn{ left:15px; }
+
+/* 右上 */
+.rightBtn{ right:15px; }
+
+.plusBtn{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    border:none;
+
+    background:#1E7A78;
+    color:white;
+    font-size:30px;
 }
 
 </style>
@@ -99,26 +106,21 @@ body{
 
 <body>
 
-<!-- 🏠 左上 -->
+<!-- 🏠 -->
 <button class="homeButton leftBtn" onclick="location.href='index.html'">🏠</button>
 
-<!-- 🔄 右上 -->
+<!-- 🔄 -->
 <button class="homeButton rightBtn" onclick="init()">🔄</button>
+
+<!-- ➕ -->
+<button class="plusBtn" onclick="addNumber()">+</button>
 
 <div class="gameContainer">
 
-    <h1>MAKE 10</h1>
+    <h1>FLOW 7</h1>
 
     <div id="board" class="board"></div>
 
-</div>
-
-<!-- 🎉 勝利 -->
-<div class="winMask" id="winMask">
-    <div class="winBox">
-        <h2>完成！</h2>
-        <button onclick="init()">再玩一次</button>
-    </div>
 </div>
 
 <script>
@@ -127,84 +129,89 @@ let board = [];
 let selected = [];
 
 const boardEl = document.getElementById("board");
-const winMask = document.getElementById("winMask");
 
 /* ===== 初始化 ===== */
 function init(){
 
     board = [];
 
-    for(let i=0;i<16;i++){
-        board.push(Math.floor(Math.random()*9)+1);
+    for(let i=0;i<7;i++){
+        board.push(rand());
     }
 
     selected = [];
     render();
-    winMask.style.display = "none";
 }
 
-/* ===== 畫面 ===== */
+/* ===== 隨機數 ===== */
+function rand(){
+    return Math.floor(Math.random()*9)+1;
+}
+
+/* ===== render ===== */
 function render(){
 
     boardEl.innerHTML = "";
 
-    board.forEach((num, index)=>{
-
-        if(num === null){
-            let empty = document.createElement("div");
-            boardEl.appendChild(empty);
-            return;
-        }
+    board.forEach((v,i)=>{
 
         let div = document.createElement("div");
         div.className = "cell";
 
-        div.innerText = num;
+        div.innerText = v;
 
-        if(selected.includes(index)){
+        if(selected.includes(i)){
             div.classList.add("selected");
         }
 
-        div.onclick = ()=>handleClick(index);
+        div.onclick = ()=>clickCell(i);
 
         boardEl.appendChild(div);
     });
 }
 
-/* ===== 點擊邏輯 ===== */
-function handleClick(index){
+/* ===== 點擊消除 ===== */
+function clickCell(i){
 
-    if(selected.includes(index)) return;
+    if(selected.includes(i)) return;
 
-    selected.push(index);
+    selected.push(i);
 
     if(selected.length === 2){
 
-        let sum =
-            board[selected[0]] +
-            board[selected[1]];
+        let a = selected[0];
+        let b = selected[1];
 
-        if(sum === 10){
-            board[selected[0]] = null;
-            board[selected[1]] = null;
+        // 👉 消除條件（相同）
+        if(board[a] === board[b]){
+            board[a] = null;
+            board[b] = null;
         }
 
         selected = [];
+        compact();
+        render();
     }
+}
 
-    checkWin();
+/* ===== 壓縮重排 ===== */
+function compact(){
+
+    board = board.filter(v => v !== null);
+}
+
+/* ===== + 按鈕 ===== */
+function addNumber(){
+
+    // 👉 從現有數字抽一個
+    let pool = board.length ? board : [rand()];
+    let newNum = pool[Math.floor(Math.random()*pool.length)];
+
+    board.push(newNum);
+
     render();
 }
 
-/* ===== 勝利判斷 ===== */
-function checkWin(){
-
-    if(board.every(v => v === null)){
-        winMask.style.display = "flex";
-    }
-}
-
-/* 啟動 */
 init();
 
 </script>
