@@ -48,5 +48,79 @@
 
 </div>
 
+<!-- 再下一個分類 -->
+
+<button class="categoryHeader"
+    onclick="toggleMenu('blockMenu')">
+
+    ▼ 方塊
+
+</button>
+
+<div class="menuContainer" id="blockMenu">
+
+    <button class="gameButton disabledButton">
+        開發中
+    </button>
+
+    <button class="gameButton disabledButton">
+        開發中
+    </button>
+
+</div>
+
+<!-- 再下一個分類 -->
+
+<button class="categoryHeader"
+    onclick="toggleMenu('pokerMenu')">
+
+    ▼ 撲克
+
+</button>
+
+<div class="menuContainer" id="pokerMenu">
+
+    <button class="gameButton disabledButton">
+        開發中
+    </button>
+
+    <button class="gameButton disabledButton">
+        開發中
+    </button>
+
+</div>
+
+<!-- 再下一個分類 -->
+
+<button class="categoryHeader"
+    onclick="toggleMenu('otherMenu')">
+
+    ▼ 其他
+
+</button>
+
+<div class="menuContainer" id="otherMenu">
+
+    <button class="gameButton disabledButton">
+        開發中
+    </button>
+
+    <button class="gameButton disabledButton">
+        開發中
+    </button>
+
+</div>
+
+<script>
+
+function toggleMenu(menuId){
+
+    const menu = document.getElementById(menuId);
+
+    menu.classList.toggle("show");
+
+}
+
+</script>
 </body>
 </html>
