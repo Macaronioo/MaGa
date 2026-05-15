@@ -26,6 +26,8 @@ content="width=device-width, initial-scale=1.0">
     display: flex;
     flex-direction: column;
     align-items: center;
+
+   overflow:hidden;
 }
 
 /* =========================
@@ -117,6 +119,10 @@ content="width=device-width, initial-scale=1.0">
     gap: 3px;
 
     width: 100%;
+
+    max-width: 340px;
+
+    margin: auto;
 }
 
 /* =========================
@@ -298,21 +304,21 @@ const difficulties = {
        rows:8,
        cols:8,
        mines:10,
-       height:"45vw"
+       height:"340px"
    },
 
    medium:{
        rows:10,
        cols:10,
        mines:20,
-       height:"60vw"
+       height:"430px"
    },
 
    hard:{
        rows:12,
        cols:12,
        mines:35,
-       height:"78vw"
+       height:"520px"
    }
 
 };
