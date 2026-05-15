@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        .board {
+        .tttBoard {
             display: grid;
 
             grid-template-columns: repeat(3, 120px);
@@ -143,7 +143,7 @@
 
         <h1>圈圈叉叉</h1>
 
-        <div class="board" id="board"></div>
+        <div class="tttBoard" id="tttBoard"></div>
 
         <h2 id="status"></h2>
 
@@ -168,7 +168,7 @@
 </div>
 
 <script>
-    let board = ["", "", "", "", "", "", "", "", ""];
+    let tttBoard = ["", "", "", "", "", "", "", "", ""];
     let gameOver = false;
 
     let score = {
@@ -182,31 +182,31 @@
         score = JSON.parse(localStorage.getItem("tttScore"));
     }
 
-    const boardDiv = document.getElementById("board");
+    const tttBoardDiv = document.getElementById("tttBoard");
     const statusText = document.getElementById("status");
     const scoreText = document.getElementById("score");
 
-    function drawBoard() {
-        boardDiv.innerHTML = "";
+    function drawtttBoard() {
+        tttBoardDiv.innerHTML = "";
 
-        board.forEach((tttCell, index) => {
+        tttBoard.forEach((tttCell, index) => {
             const div = document.createElement("div");
             div.className = "tttCell";
             div.innerText = tttCell;
 
             div.onclick = () => playerMove(index);
 
-            boardDiv.appendChild(div);
+            tttBoardDiv.appendChild(div);
         });
 
         updateScore();
     }
 
     function playerMove(index) {
-        if (board[index] !== "" || gameOver) return;
+        if (tttBoard[index] !== "" || gameOver) return;
 
-        board[index] = "❌";
-        drawBoard();
+        tttBoard[index] = "❌";
+        drawtttBoard();
 
         if (checkWin("❌")) {
             showEndScreen("🎉 你贏了！");
@@ -216,7 +216,7 @@
             return;
         }
 
-        if (!board.includes("")) {
+        if (!tttBoard.includes("")) {
             showEndScreen("🤝 平手！");
             score.draw++;
             saveScore();
@@ -232,8 +232,8 @@
 
         let move = findBestMove();
 
-        board[move] = "⭕";
-        drawBoard();
+        tttBoard[move] = "⭕";
+        drawtttBoard();
 
         if (checkWin("⭕")) {
             showEndScreen("😢 你輸了！");
@@ -243,7 +243,7 @@
             return;
         }
 
-        if (!board.includes("")) {
+        if (!tttBoard.includes("")) {
             showEndScreen("🤝 平手！");
             score.draw++;
             saveScore();
@@ -264,10 +264,10 @@
         if (blockMove !== -1) return blockMove;
 
         // 3. 中心優先
-        if (board[4] === "") return 4;
+        if (tttBoard[4] === "") return 4;
 
         // 4. 隨機
-        let empty = board
+        let empty = tttBoard
             .map((v, i) => v === "" ? i : null)
             .filter(v => v !== null);
 
@@ -282,13 +282,13 @@
         ];
 
         for (let pattern of winPatterns) {
-            let values = pattern.map(i => board[i]);
+            let values = pattern.map(i => tttBoard[i]);
 
             let countPlayer = values.filter(v => v === player).length;
             let countEmpty = values.filter(v => v === "").length;
 
             if (countPlayer === 2 && countEmpty === 1) {
-                return pattern.find(i => board[i] === "");
+                return pattern.find(i => tttBoard[i] === "");
             }
         }
 
@@ -303,7 +303,7 @@
         ];
 
         return winPatterns.some(pattern =>
-            pattern.every(i => board[i] === player)
+            pattern.every(i => tttBoard[i] === player)
         );
     }
 
@@ -327,13 +327,13 @@
     }
 
     function resetGame() {
-        board = ["", "", "", "", "", "", "", "", ""];
+        tttBoard = ["", "", "", "", "", "", "", "", ""];
         gameOver = false;
         statusText.innerText = "";
-        drawBoard();
+        drawtttBoard();
     }
 
-    drawBoard();
+    drawtttBoard();
 </script>
 
 </body>
