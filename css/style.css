@@ -165,7 +165,7 @@ h1 {
         grid-template-rows: repeat(3, 28vw);
     }
 
-    .cell {
+    .tttCell {
         font-size: 18vw;
     }
 
