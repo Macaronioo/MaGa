@@ -19,7 +19,7 @@ content="width=device-width, initial-scale=1.0">
 .gameWrapper{
 
     width: 95vw;
-    max-width: 520px;
+    max-width: 430px;
 
     margin: auto;
 
@@ -126,7 +126,7 @@ content="width=device-width, initial-scale=1.0">
 .cell{
 
     width: 100%;
-
+    font-size: 14px;
     aspect-ratio: 1/1;
 
     background: #1E7A78;
@@ -170,7 +170,7 @@ content="width=device-width, initial-scale=1.0">
 @media (max-width:600px){
 
     .cell{
-        font-size: 15px;
+        font-size: 12px;
     }
 
     .modeBtn{
@@ -294,26 +294,26 @@ let currentDifficulty = "easy";
 
 const difficulties = {
 
-    easy:{
-        rows:8,
-        cols:8,
-        mines:10,
-        height:"75vw"
-    },
+   easy:{
+       rows:8,
+       cols:8,
+       mines:10,
+       height:"58vw"
+   },
 
-    medium:{
-        rows:10,
-        cols:10,
-        mines:20,
-        height:"105vw"
-    },
+   medium:{
+       rows:10,
+       cols:10,
+       mines:20,
+       height:"78vw"
+   },
 
-    hard:{
-        rows:12,
-        cols:12,
-        mines:35,
-        height:"135vw"
-    }
+   hard:{
+       rows:12,
+       cols:12,
+       mines:35,
+       height:"98vw"
+   }
 
 };
 
