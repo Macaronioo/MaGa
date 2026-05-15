@@ -15,7 +15,7 @@
 
 .gameContainer{
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
 
     display:flex;
     flex-direction:column;
@@ -43,34 +43,39 @@
 
 .g2048Board {
     display: grid;
-    grid-template-columns: repeat(4, 75px);
-    grid-template-rows: repeat(4, 75px);
 
-    gap: 8px;
+    grid-template-columns: repeat(4, min(22vw, 90px));
+    grid-template-rows: repeat(4, min(22vw, 90px));
+
+    gap: 10px;
 
     margin: 20px auto;
-    padding: 8px;
+    padding: 10px;
 
     background: #0B5351;
     border-radius: 12px;
+
+    touch-action: none;   /* ⭐ 防止手機滑動網頁 */
 }
 
 /* 格子 */
 .g2048Cell {
-    width: 75px;
-    height: 75px;
+    width: 100%;
+    height: 100%;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    font-size: 22px;
+    font-size: clamp(18px, 5vw, 34px); /* ⭐ 重點 */
     font-weight: bold;
 
     border-radius: 10px;
 
     background: #DCEFED;
-    color:#0B5351;
+    color: #0B5351;
+
+    user-select: none;
 }
 
 /* 分數色 */
