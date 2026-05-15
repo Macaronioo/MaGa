@@ -10,19 +10,20 @@
     <style>
         .board {
             display: grid;
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(3, 100px);
+
+            grid-template-columns: repeat(3, 120px);
+            grid-template-rows: repeat(3, 120px);
 
             width: fit-content;
-        margin: auto;
-    
+            margin: auto;
+
             background: transparent;
         }
 
         /* 每一格 */
         .cell {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
 
             background: white;
 
@@ -58,8 +59,8 @@
 
         .restartButton {
 
-            width: 180px;
-            height: 55px;
+            width: 140px;
+            height: 46px;
 
             border: none;
             border-radius: 12px;
@@ -67,7 +68,7 @@
             background: #1E7A78;
             color: white;
 
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
 
             cursor: pointer;
@@ -118,6 +119,15 @@
         .hidden {
             display: none;
         }
+
+        .gameContainer{
+            width: 100%;
+            max-width: 420px;
+
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
     </style>
 </head>
 
@@ -129,7 +139,7 @@
 
 <div class="gameArea">
 
-    <div>
+    <div class="gameContainer">
 
         <h1>圈圈叉叉</h1>
 
