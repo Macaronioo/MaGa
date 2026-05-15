@@ -118,11 +118,9 @@ content="width=device-width, initial-scale=1.0">
 
     gap: 3px;
 
-    width: 100%;
-
-    max-width: 340px;
-
     margin: auto;
+
+    width: fit-content;
 }
 
 /* =========================
@@ -131,9 +129,10 @@ content="width=device-width, initial-scale=1.0">
 
 .cell{
 
-    width: 100%;
+    width: 24px;
+    height: 24px;
+
     font-size: 14px;
-    aspect-ratio: 1/1;
 
     background: #1E7A78;
 
@@ -176,6 +175,10 @@ content="width=device-width, initial-scale=1.0">
 @media (max-width:600px){
 
     .cell{
+
+        width: 20px;
+        height: 20px;
+
         font-size: 12px;
     }
 
@@ -294,6 +297,8 @@ let flagMode = false;
 
 let currentDifficulty = "easy";
 
+let firstClick = true;
+
 /* =========================
    🎮 難度
 ========================= */
@@ -301,24 +306,21 @@ let currentDifficulty = "easy";
 const difficulties = {
 
    easy:{
-       rows:8,
-       cols:8,
-       mines:10,
-       height:"340px"
+       rows:9,
+       cols:9,
+       mines:12
    },
 
    medium:{
-       rows:10,
-       cols:10,
-       mines:20,
-       height:"430px"
+       rows:14,
+       cols:14,
+       mines:35
    },
 
    hard:{
-       rows:12,
-       cols:12,
-       mines:35,
-       height:"520px"
+       rows:18,
+       cols:18,
+       mines:70
    }
 
 };
@@ -331,6 +333,8 @@ function startGame(diff){
 
     gameOver = false;
 
+    firstClick = true;
+
     flagMode = false;
 
     flagBtn.innerText = "🚩";
@@ -342,9 +346,6 @@ function startGame(diff){
     rows = difficulties[diff].rows;
     cols = difficulties[diff].cols;
     mines = difficulties[diff].mines;
-
-    boardEl.style.height =
-    difficulties[diff].height;
 
     board = [];
 
@@ -553,6 +554,22 @@ function handleClick(r,c){
     if(cell.flag ||
        cell.revealed) return;
 
+   if(firstClick){
+
+       firstClick = false;
+
+       if(cell.mine){
+
+           cell.mine = false;
+
+           relocateMine();
+
+           updateCounts();
+
+       }
+
+   }
+
     if(cell.mine){
 
         revealAll();
@@ -726,6 +743,43 @@ diff,event){
     "active");
 
     startGame(diff);
+
+}
+
+function relocateMine(){
+
+    while(true){
+
+        let r =
+        Math.floor(Math.random()*rows);
+
+        let c =
+        Math.floor(Math.random()*cols);
+
+        if(!board[r][c].mine){
+
+            board[r][c].mine = true;
+
+            return;
+
+        }
+
+    }
+
+}
+
+function updateCounts(){
+
+    for(let r=0;r<rows;r++){
+
+        for(let c=0;c<cols;c++){
+
+            board[r][c].count =
+            countMines(r,c);
+
+        }
+
+    }
 
 }
 
