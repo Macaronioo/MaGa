@@ -1,4 +1,4 @@
-<script>
+
     let tttBoard = ["", "", "", "", "", "", "", "", ""];
     let gameOver = false;
     let playerLock = false;
@@ -171,4 +171,4 @@
     }
 
     drawtttBoard();
-</script>
+
