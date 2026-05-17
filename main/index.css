@@ -1,0 +1,91 @@
+/* =========================
+   📦 主畫面區塊
+========================= */
+
+.categorySection{
+
+    width:100%;
+
+    margin-bottom:18px;
+}
+
+/* =========================
+   📂 分類標題
+========================= */
+
+.categoryHeader{
+
+    width:calc(100% - 24px);
+
+    margin:auto;
+
+    padding:16px;
+
+    border:none;
+    border-radius:18px;
+
+    background:var(--dark);
+
+    color:white;
+
+    font-size:24px;
+    font-weight:bold;
+
+    text-align:left;
+
+    cursor:pointer;
+}
+
+/* =========================
+   🎮 遊戲列表
+========================= */
+
+.menuContainer{
+
+    width:calc(100% - 24px);
+
+    margin:12px auto 0 auto;
+
+    display:none;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:10px;
+}
+
+/* 展開 */
+
+.menuContainer.show{
+
+    display:grid;
+}
+
+/* =========================
+   🎮 遊戲按鈕
+========================= */
+
+.menuContainer .gameButton{
+
+    aspect-ratio:1/1;
+
+    font-size:14px;
+
+    border-radius:16px;
+
+    padding:4px;
+}
+
+/* =========================
+   📱 超小手機
+========================= */
+
+@media (max-width:390px){
+
+    .menuContainer{
+
+        grid-template-columns:
+        repeat(4,1fr);
+    }
+
+}
