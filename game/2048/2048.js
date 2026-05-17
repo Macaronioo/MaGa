@@ -1,5 +1,7 @@
 <script>
 
+alert("2048 JS 有載入");
+    
 document.addEventListener(
     "gesturestart",
     e => e.preventDefault(),
