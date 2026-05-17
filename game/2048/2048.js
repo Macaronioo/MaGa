@@ -20,6 +20,7 @@ const overMask = document.getElementById("overMask");
 bestEl.innerText = best;
 
 function init(){
+    console.log("init 有進來");
 
     board = Array(4).fill().map(()=>Array(4).fill(0));
     score = 0;
@@ -35,6 +36,7 @@ function init(){
 ========================= */
 
 function add(){
+    console.log("add 有進來");
     let empty = [];
 
     for(let r=0;r<4;r++){
@@ -54,6 +56,7 @@ function add(){
 ========================= */
 
 function render(){
+    console.log("render 有進來");
 
     boardEl.innerHTML = "";
 
