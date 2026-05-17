@@ -1,8 +1,9 @@
 <script>
 
 document.addEventListener(
-"gesturestart",
-e=>e.preventDefault()
+    "gesturestart",
+    e => e.preventDefault(),
+    { passive:false }
 );
 
 let board;
@@ -117,7 +118,7 @@ function moveLeft(){
 
 function moveRight(){
     for(let r=0;r<4;r++){
-        board[r] = slide(board[r].reverse()).reverse();
+        board[r] = slide([...board[r]].reverse()).reverse();
     }
 }
 
@@ -135,11 +136,16 @@ function moveUp(){
 function moveDown(){
     for(let c=0;c<4;c++){
         let col = [];
-        for(let r=0;r<4;r++) col.push(board[r][c]);
 
-        col = slide(col.reverse()).reverse();
+        for(let r=0;r<4;r++){
+            col.push(board[r][c]);
+        }
 
-        for(let r=0;r<4;r++) board[r][c] = col[r];
+        col = slide([...col].reverse()).reverse();
+
+        for(let r=0;r<4;r++){
+            board[r][c] = col[r];
+        }
     }
 }
 
@@ -199,7 +205,7 @@ document.addEventListener("keydown", e=>{
 
 let startX, startY;
 
-document.addEventListener("touchstart", e=>{
+boardEl.addEventListener("touchstart", e=>{
 
     e.preventDefault();
 
@@ -208,13 +214,13 @@ document.addEventListener("touchstart", e=>{
 
 }, { passive:false });
 
-document.addEventListener("touchmove", e=>{
+boardEl.addEventListener("touchmove", e=>{
 
     e.preventDefault();
 
 }, { passive:false });
 
-document.addEventListener("touchend", e=>{
+boardEl.addEventListener("touchend", e=>{
 
     e.preventDefault();
 
@@ -223,10 +229,18 @@ document.addEventListener("touchend", e=>{
 
     let before = JSON.stringify(board);
 
+    const threshold = 30;
     if(Math.abs(dx) > Math.abs(dy)){
+
+        if(Math.abs(dx) < threshold) return;
+
         if(dx > 0) moveRight();
         else moveLeft();
+
     }else{
+
+        if(Math.abs(dy) < threshold) return;
+
         if(dy > 0) moveDown();
         else moveUp();
     }
@@ -247,7 +261,10 @@ document.addEventListener("touchend", e=>{
 ========================= */
 
 function closeOver(){
-    overMask.style.display="none";
+
+    overMask.style.display = "none";
+
+    init();
 }
 
 init();
