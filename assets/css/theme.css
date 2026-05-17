@@ -1,0 +1,25 @@
+:root{
+
+    /* 主色 */
+    --main:#1E7A78;
+
+    /* 深色 */
+    --dark:#0B5351;
+
+    /* 背景 */
+    --bg:#DAEEE1;
+
+    /* 白色 */
+    --white:#ffffff;
+
+    /* hover */
+    --hover:#25908D;
+
+    /* 陰影 */
+    --shadow:
+    0 4px 10px rgba(0,0,0,0.15);
+
+    /* 圓角 */
+    --radius:15px;
+
+}
