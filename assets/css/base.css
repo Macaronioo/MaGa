@@ -45,6 +45,123 @@ h1{
 }
 
 /* =========================
+   ☰ 左上選單
+========================= */
+
+.menuBtn {
+
+    position: fixed;
+
+    top: 14px;
+    left: 14px;
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #0B5351;
+    color: white;
+
+    font-size: 26px;
+
+    z-index: 3000;
+
+    cursor: pointer;
+}
+
+/* =========================
+   📦 側邊欄
+========================= */
+
+.sideMenu {
+
+    position: fixed;
+
+    top: 0;
+    left: -260px;
+
+    width: 240px;
+    height: 100vh;
+
+    background: white;
+
+    box-shadow: 3px 0 10px rgba(0,0,0,0.15);
+
+    transition: 0.25s;
+
+    z-index: 4000;
+
+    padding-top: 70px;
+
+    box-sizing: border-box;
+}
+
+/* 打開 */
+
+.sideMenu.show {
+
+    left: 0;
+}
+
+/* 選單項目 */
+
+.menuItem {
+
+    width: 100%;
+
+    padding: 18px 22px;
+
+    border: none;
+
+    background: transparent;
+
+    text-align: left;
+
+    font-size: 18px;
+
+    color: #0B5351;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+.menuItem:active {
+
+    background: #E6F5F3;
+}
+
+/* =========================
+   🌑 背景遮罩
+========================= */
+
+.menuOverlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.35);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 0.2s;
+
+    z-index: 3500;
+}
+
+.menuOverlay.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+/* =========================
    📱 手機
 ========================= */
 
