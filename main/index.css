@@ -28,7 +28,7 @@
 
     color:white;
 
-    font-size:24px;
+    font-size:20px;
     font-weight:bold;
 
     text-align:left;
@@ -74,6 +74,113 @@
     border-radius:16px;
 
     padding:4px;
+}
+
+/* =========================
+   ☰ 側邊選單
+========================= */
+
+/* 左上 ☰ */
+.menuBtn{
+
+    position: fixed;
+
+    top: 14px;
+    left: 14px;
+
+    width: 48px;
+    height: 48px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #0B5351;
+    color: white;
+
+    font-size: 24px;
+
+    z-index: 1200;
+}
+
+/* 黑色背景 */
+.menuOverlay{
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.4);
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: 0.2s;
+
+    z-index: 998;
+}
+
+.menuOverlay.show{
+
+    opacity: 1;
+    pointer-events: auto;
+
+}
+
+/* 側邊欄 */
+.sideMenu{
+
+    position: fixed;
+
+    top: 0;
+    left: -240px;
+
+    width: 220px;
+    height: 100%;
+
+    background: white;
+
+    padding: 80px 16px;
+
+    box-sizing: border-box;
+
+    transition: 0.25s;
+
+    z-index: 999;
+
+    box-shadow:
+    4px 0 12px rgba(0,0,0,0.2);
+
+}
+
+/* 展開 */
+.sideMenu.show{
+
+    left: 0;
+
+}
+
+/* 選單按鈕 */
+.menuItem{
+
+    width: 100%;
+
+    border: none;
+    border-radius: 14px;
+
+    padding: 14px;
+
+    margin-bottom: 12px;
+
+    background: #1E7A78;
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+
 }
 
 /* =========================
