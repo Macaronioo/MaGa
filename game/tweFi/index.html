@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>1到25</title>
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/tweFi.css">
+
+</head>
+
+<body>
+
+<!-- 🏠 -->
+<button class="topButton leftBtn"
+onclick="location.href='index.html'">
+
+🏠
+
+</button>
+
+<!-- 🔄 -->
+<button class="topButton rightBtn"
+onclick="startGame()">
+
+🔄
+
+</button>
+
+<div class="page">
+
+    <h1>數字挑戰 1-25</h1>
+
+    <!-- 📊 上方 -->
+
+    <div class="topBar">
+
+        <div class="best"
+        id="best">
+
+            🏆 最佳紀錄：-- 秒
+
+        </div>
+
+        <div class="timer"
+        id="timer">
+
+            0.00 秒
+
+        </div>
+
+    </div>
+
+    <!-- 🎮 棋盤 -->
+
+    <div class="grid"
+    id="grid"></div>
+
+</div>
+
+<script src="js/tweFi.js"></script>
+
+</body>
+</html>
