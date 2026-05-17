@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>2048</title>
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/2048.css">
+
+</head>
+
+<body class="noScroll">
+
+<!-- 🏠 -->
+<button class="topButton leftBtn"
+onclick="location.href='index.html'">
+
+🏠
+
+</button>
+
+<!-- 🔄 -->
+<button class="topButton rightBtn"
+onclick="init()">
+
+🔄
+
+</button>
+
+<div class="page">
+
+    <h1>2048</h1>
+
+    <div class="g2048Top">
+
+        <div class="scoreBox">
+            分數
+            <span id="score">0</span>
+        </div>
+
+        <div class="scoreBox">
+            最高
+            <span id="best">0</span>
+        </div>
+
+    </div>
+
+    <div id="board"
+    class="g2048Board"></div>
+
+</div>
+
+<!-- 💀 Game Over -->
+
+<div class="gameOverMask"
+id="overMask">
+
+    <div class="gameOverBox">
+
+        <h2>Game Over</h2>
+
+        <button class="mainButton"
+        onclick="init(); closeOver();">
+
+            重新開始
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/2048.js"></script>
+
+</body>
+</html>
