@@ -1,153 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 
 <head>
 
-    <title>莉莉摳摳</title>
+<meta charset="UTF-8">
 
-    <link rel="stylesheet" href="css/style.css">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>莉莉摳摳</title>
+
+<link rel="stylesheet"
+href="assets/css/base.css">
+
+<link rel="stylesheet"
+href="assets/css/theme.css">
+
+<link rel="stylesheet"
+href="assets/css/ui.css">
+
+<link rel="stylesheet"
+href="main/index.css">
 
 </head>
 
 <body>
 
-    <h1>莉莉摳摳</h1>
+<h1>莉莉摳摳</h1>
 
-<!-- 數字 -->
+<!-- =========================
+     🔢 數字
+========================= -->
 
-<button class="categoryHeader"
+<section class="categorySection">
+
+    <button class="categoryHeader"
     onclick="toggleMenu('numberMenu')">
 
-    ▼ 數字
+        ▼ 數字
 
-</button>
+    </button>
 
-<div class="menuContainer" id="numberMenu">
+    <div class="menuContainer"
+    id="numberMenu">
 
-    <button class="gameButton"
+        <button class="gameButton"
         onclick="location.href='2A3B.html'">
 
-        2A3B
+            2A3B
 
-    </button>
+        </button>
 
-    <button class="gameButton"
+        <button class="gameButton"
         onclick="location.href='tweFi.html'">
 
-        1到25
+            1-25
 
-    </button>
+        </button>
 
-    <button class="gameButton"
+        <button class="gameButton"
         onclick="location.href='2048.html'">
 
-        2048
+            2048
 
-    </button>
+        </button>
 
-    <button class="gameButton"
+        <button class="gameButton"
         onclick="location.href='make10.html'">
 
-        Make 10
+            Make10
 
-    </button>
-    
-    <button class="gameButton disabledButton">
-        開發中
-    </button>
+        </button>
 
-</div>
+        <button class="gameButton disabledButton">
 
-<!-- 再下一個分類 -->
+            開發中
 
-<button class="categoryHeader"
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     🧩 方塊
+========================= -->
+
+<section class="categorySection">
+
+    <button class="categoryHeader"
     onclick="toggleMenu('blockMenu')">
 
-    ▼ 方塊
+        ▼ 方塊
 
-</button>
-
-<div class="menuContainer" id="blockMenu">
-
-    <button class="gameButton disabledButton">
-        開發中
     </button>
 
-    <button class="gameButton disabledButton">
-        開發中
-    </button>
+    <div class="menuContainer"
+    id="blockMenu">
 
-</div>
+        <button class="gameButton disabledButton">
 
-<!-- 再下一個分類 -->
+            開發中
 
-<button class="categoryHeader"
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     🃏 撲克
+========================= -->
+
+<section class="categorySection">
+
+    <button class="categoryHeader"
     onclick="toggleMenu('pokerMenu')">
 
-    ▼ 撲克
+        ▼ 撲克
 
-</button>
-
-<div class="menuContainer" id="pokerMenu">
-
-    <button class="gameButton disabledButton">
-        開發中
     </button>
 
-    <button class="gameButton disabledButton">
-        開發中
-    </button>
+    <div class="menuContainer"
+    id="pokerMenu">
 
-</div>
+        <button class="gameButton disabledButton">
 
-<!-- 再下一個分類 -->
+            開發中
 
-<button class="categoryHeader"
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     🎮 其他
+========================= -->
+
+<section class="categorySection">
+
+    <button class="categoryHeader"
     onclick="toggleMenu('otherMenu')">
 
-    ▼ 其他
+        ▼ 其他
 
-</button>
+    </button>
 
-<div class="menuContainer" id="otherMenu">
+    <div class="menuContainer"
+    id="otherMenu">
 
-    <button class="gameButton"
+        <button class="gameButton"
         onclick="location.href='OOXX.html'">
 
-        圈圈叉叉
+            OOXX
 
-    </button>
+        </button>
 
-    <button class="gameButton"
+        <button class="gameButton"
         onclick="location.href='Sheepp.html'">
-        
-        瑪了個莉
-        
-    </button>
-    
-    <button class="gameButton"
+
+            瑪莉
+
+        </button>
+
+        <button class="gameButton"
         onclick="location.href='mine.html'">
-        
-        踩地雷
-        
-    </button>
-    
-    <button class="gameButton disabledButton">
-        開發中
-    </button>
 
-</div>
+            地雷
 
-<script>
+        </button>
 
-function toggleMenu(menuId){
+        <button class="gameButton disabledButton">
 
-    const menu = document.getElementById(menuId);
+            開發中
 
-    menu.classList.toggle("show");
+        </button>
 
-}
+    </div>
 
-</script>
+</section>
+
+<script src="main/index.js"></script>
+
 </body>
+
 </html>
