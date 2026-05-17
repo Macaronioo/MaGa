@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>圈圈叉叉</title>
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/ooxx.css">
+
+</head>
+
+<body>
+
+<!-- 🏠 -->
+<button class="topButton leftBtn"
+onclick="location.href='index.html'">
+
+🏠
+
+</button>
+
+<div class="page">
+
+    <h1>圈圈叉叉</h1>
+
+    <div class="tttBoard"
+    id="tttBoard"></div>
+
+    <div class="score"
+    id="score"></div>
+
+    <button class="mainButton"
+    onclick="resetGame()">
+
+        重新開始
+
+    </button>
+
+</div>
+
+<!-- 🎉 結束 -->
+
+<div id="endScreen"
+class="endScreen hidden">
+
+    <div class="endBox">
+
+        <h2 id="endText">結果</h2>
+
+        <button class="mainButton smallButton"
+        onclick="resetGame(); hideEndScreen();">
+
+            再玩一次
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/ooxx.js"></script>
+
+</body>
+</html>
