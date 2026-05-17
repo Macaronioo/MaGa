@@ -25,7 +25,44 @@ href="main/index.css">
 </head>
 
 <body>
+<!-- ☰ 左上選單 -->
 
+<button class="menuBtn"
+    onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+<!-- 🌑 背景 -->
+
+<div class="menuOverlay"
+    id="menuOverlay"
+    onclick="closeMenu()">
+
+</div>
+
+<!-- 📦 側邊欄 -->
+
+<div class="sideMenu"
+    id="sideMenu">
+
+    <button class="menuItem"
+        onclick="showLocalData()">
+
+        📊 本地紀錄
+
+    </button>
+
+    <button class="menuItem"
+        onclick="clearAllData()">
+
+        🗑 清除全部紀錄
+
+    </button>
+
+</div>
+     
 <h1>莉莉摳摳</h1>
 
 <!-- =========================
