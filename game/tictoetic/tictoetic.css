@@ -1,0 +1,161 @@
+/* =========================
+   🎮 頁面
+========================= */
+
+.page{
+
+    width:100%;
+    max-width:520px;
+
+    margin:auto;
+
+    padding:
+    80px 16px 30px;
+
+    box-sizing:border-box;
+
+    text-align:center;
+}
+
+/* =========================
+   🎮 棋盤
+========================= */
+
+.tttBoard{
+
+    width:100%;
+
+    max-width:420px;
+
+    margin:20px auto;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    aspect-ratio:1/1;
+}
+
+/* =========================
+   🧩 格子
+========================= */
+
+.tttCell{
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size: clamp(42px, 14vw, 72px);
+
+    font-weight:bold;
+
+    user-select:none;
+
+    cursor:pointer;
+
+    transition:0.15s;
+
+    aspect-ratio:1/1;
+}
+
+/* 線 */
+
+.tttCell:nth-child(1),
+.tttCell:nth-child(2),
+.tttCell:nth-child(4),
+.tttCell:nth-child(5),
+.tttCell:nth-child(7),
+.tttCell:nth-child(8){
+
+    border-right:
+    3px solid #0B5351;
+}
+
+.tttCell:nth-child(-n+6){
+
+    border-bottom:
+    3px solid #0B5351;
+}
+
+/* hover */
+
+.tttCell:active{
+
+    background:#E6F5F3;
+}
+
+/* =========================
+   📊 分數
+========================= */
+
+.score{
+
+    margin-top:20px;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:#0B5351;
+
+    line-height:1.6;
+}
+
+/* =========================
+   🎉 結束畫面
+========================= */
+
+.endScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,0.6);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:999;
+}
+
+.endBox{
+
+    width:80%;
+
+    max-width:300px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px 20px;
+
+    text-align:center;
+}
+
+.hidden{
+
+    display:none;
+}
+
+/* 🔥 小按鈕 */
+
+.smallButton{
+
+    width:140px;
+
+    height:48px;
+
+    font-size:18px;
+
+    margin-top:16px;
+}
