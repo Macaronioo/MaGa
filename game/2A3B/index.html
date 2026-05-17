@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>2A3B</title>
+
+<link rel="stylesheet" href="../../assets/css/base.css">
+<link rel="stylesheet" href="./2A3B.css">
+
+</head>
+
+<body>
+
+<!-- 🏠 -->
+<button class="topButton leftBtn"
+onclick="location.href='index.html'">
+
+🏠
+
+</button>
+
+<!-- 🔄 -->
+<button class="topButton rightBtn"
+onclick="initGame()">
+
+🔄
+
+</button>
+
+<div class="page">
+
+    <h1>2A3B</h1>
+
+    <!-- 📊 紀錄 -->
+
+    <div class="infoArea">
+
+        <div class="infoBox">
+
+            最佳紀錄
+
+            <span id="bestRecord">
+                --
+            </span>
+
+        </div>
+
+        <div class="infoBox">
+
+            成功次數
+
+            <span id="winCount">
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- 🔢 輸入 -->
+
+    <div class="inputBox">
+
+        <div class="box" id="b0"></div>
+        <div class="box" id="b1"></div>
+        <div class="box" id="b2"></div>
+        <div class="box" id="b3"></div>
+
+    </div>
+
+    <h2 id="result"></h2>
+
+    <!-- ⌨️ 鍵盤 -->
+
+    <div class="keyboard">
+
+        <div class="row">
+
+            <button class="key"
+            onclick="press('1')">1</button>
+
+            <button class="key"
+            onclick="press('2')">2</button>
+
+            <button class="key"
+            onclick="press('3')">3</button>
+
+            <button class="key"
+            onclick="press('4')">4</button>
+
+            <button class="key"
+            onclick="press('5')">5</button>
+
+            <button class="key special"
+            onclick="clearInput()">
+
+                ⌫
+
+            </button>
+
+        </div>
+
+        <div class="row">
+
+            <button class="key"
+            onclick="press('6')">6</button>
+
+            <button class="key"
+            onclick="press('7')">7</button>
+
+            <button class="key"
+            onclick="press('8')">8</button>
+
+            <button class="key"
+            onclick="press('9')">9</button>
+
+            <button class="key"
+            onclick="press('0')">0</button>
+
+            <button class="key special"
+            onclick="checkGuess()">
+
+                ✔
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- 📜 紀錄 -->
+
+    <div class="log"
+    id="log"></div>
+
+</div>
+
+<script src="./2A3B.js" defer></script>
+
+</body>
+</html>
