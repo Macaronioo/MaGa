@@ -1,0 +1,185 @@
+/* =========================
+   🎮 頁面
+========================= */
+
+.page{
+
+    width:100%;
+    max-width:520px;
+
+    margin:auto;
+
+    padding:
+    80px 14px 30px;
+
+    box-sizing:border-box;
+}
+
+/* =========================
+   📊 資訊區
+========================= */
+
+.infoArea{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:18px;
+}
+
+.infoBox{
+
+    flex:1;
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:12px;
+
+    text-align:center;
+
+    font-size:15px;
+    font-weight:bold;
+}
+
+.infoBox span{
+
+    display:block;
+
+    margin-top:6px;
+
+    font-size:26px;
+
+    color:#0B5351;
+}
+
+/* =========================
+   🔢 輸入區
+========================= */
+
+.inputBox{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    margin-bottom:16px;
+}
+
+.box{
+
+    width:20vw;
+    height:20vw;
+
+    max-width:70px;
+    max-height:70px;
+
+    background:white;
+
+    border:
+    3px solid #0B5351;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:36px;
+    font-weight:bold;
+}
+
+/* =========================
+   📢 結果
+========================= */
+
+#result{
+
+    text-align:center;
+
+    min-height:36px;
+
+    color:#0B5351;
+}
+
+/* =========================
+   ⌨️ 鍵盤
+========================= */
+
+.keyboard{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.row{
+
+    display:flex;
+
+    gap:10px;
+}
+
+.key{
+
+    flex:1;
+
+    height:56px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#1E7A78;
+
+    color:white;
+
+    font-size:24px;
+    font-weight:bold;
+}
+
+.key:active{
+
+    transform:scale(0.95);
+}
+
+.special{
+
+    background:#0B5351;
+}
+
+/* =========================
+   📜 紀錄
+========================= */
+
+.log{
+
+    margin-top:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+}
+
+.card{
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:12px;
+
+    font-size:18px;
+
+    box-shadow:
+    0 2px 6px rgba(0,0,0,0.08);
+}
