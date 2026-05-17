@@ -1,0 +1,60 @@
+/* =========================
+   🌍 全域基礎
+========================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    min-height:100%;
+
+    overscroll-behavior:none;
+    touch-action:none;
+
+    font-family:Arial,sans-serif;
+}
+
+/* =========================
+   🎨 預設背景
+========================= */
+
+body{
+
+    background:#DAEEE1;
+
+    color:#0B5351;
+}
+
+/* =========================
+   🧠 標題
+========================= */
+
+h1{
+
+    text-align:center;
+
+    margin:20px 0;
+
+    font-size:48px;
+
+    color:#0B5351;
+}
+
+/* =========================
+   📱 手機
+========================= */
+
+@media (max-width:600px){
+
+    h1{
+        font-size:8vw;
+    }
+
+}
