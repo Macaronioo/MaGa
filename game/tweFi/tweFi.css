@@ -1,0 +1,145 @@
+/* =========================
+   🎮 頁面
+========================= */
+
+.page{
+
+    width:100%;
+    max-width:520px;
+
+    margin:auto;
+
+    padding:
+    80px 14px 30px;
+
+    box-sizing:border-box;
+}
+
+/* =========================
+   📊 上方資訊
+========================= */
+
+.topBar{
+
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:14px;
+}
+
+.best,
+.timer{
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:12px;
+
+    text-align:center;
+
+    font-weight:bold;
+
+    color:#0B5351;
+}
+
+.best{
+
+    flex:1;
+
+    font-size:16px;
+}
+
+.timer{
+
+    width:120px;
+
+    font-size:22px;
+}
+
+/* =========================
+   🎮 5x5
+========================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:10px;
+}
+
+/* =========================
+   🔢 格子
+========================= */
+
+.cell{
+
+    aspect-ratio:1/1;
+
+    background:white;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:28px;
+    font-weight:bold;
+
+    color:#0B5351;
+
+    user-select:none;
+
+    cursor:pointer;
+
+    transition:0.12s;
+}
+
+/* 點擊 */
+
+.cell.done{
+
+    background:#1E7A78;
+
+    color:white;
+
+    transform:scale(0.92);
+}
+
+/* 點錯 */
+
+.cell.wrong{
+
+    background:#FF6B6B;
+
+    color:white;
+}
+
+/* =========================
+   📱 手機
+========================= */
+
+@media (max-width:600px){
+
+    .cell{
+
+        font-size:24px;
+    }
+
+    .timer{
+
+        width:110px;
+
+        font-size:20px;
+    }
+
+}
